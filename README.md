@@ -1,7 +1,7 @@
-#AMBIL COOKIES FACEBOOK
+# AMBIL COOKIES FACEBOOK
 
 
-###termux
+### termux
 - **`pkg update && pkg upgerade -y`**
 - **`pkg install python`**
 - **`pkg install git`**
