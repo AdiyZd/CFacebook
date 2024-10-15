@@ -6,5 +6,5 @@
 - **`pkg install python`**
 - **`pkg install git`**
 - **`pip3 intall requests`**
-- **`git clone `**
+- **`git clone https://github.com/AdiyZd/CFacebook.git`**
 - **`cd ~`**
