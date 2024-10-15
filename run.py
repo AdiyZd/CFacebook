@@ -20,7 +20,7 @@ UNGU = "\033[1;35m"  # ungu ++
 x = "\033[0m"  # default
 
 
-os.system("cls")
+os.system("clear")
 print(f'{putih}WELLCOME BOLO DI SC ADIYZD\n')
 print(f"""
 {abang}░█████╗░██████╗░██╗██╗░░░██╗███████╗██████╗░
@@ -39,9 +39,9 @@ print(f"{merah} 00. OUT!{x}")
 
 user_interaksi = input(f"{putih}Masukan pilihan dana {x}: {kuning}")
 time.sleep(5)
-os.system("cls")
+os.system("clear")
 print(f"{x} Silahkan tunggu sebentar, system sedang bersiap!")
-os.system("cls")
+os.system("clear")
 
 if user_interaksi == "1":
     print(f"{BIRU}system belom di tambahkan!{x}")
