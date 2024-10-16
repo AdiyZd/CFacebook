@@ -196,27 +196,21 @@ def banner():
                     # interaksi jika true 
                     print(f"{putih} Silahkan di simpan dengan benar password nya")
                     print(f"Ketik (y/n) jika ingin lanjut{x}")
-                    
-                    
-                    # opsional 
-                    # opsi2 = input("apakah anda ingin lanjut (y/n)")
-
-                    # if opsi2.lower() == "y":
-                    #     os.system("clear")
-                    #     runing = False
-                    #     print("system akan segera siap silahkan tunggu sebentar")
-                    #     time.sleep(5)
-                    # else:
-                    #     os.system("clear")
-                    #     print(f"{abang}Terimaksih telah menggunakan script adiy {x}")
-                    #     time.sleep(5)
-                    #     break
+                
 
             except binascii.Error:
                 print(f"{abang} Masukan string bukan number masbroo")
             except Exception as e:
                 print(f"{abang} Error {x}: {e}")
                 time.sleep(5)
+
+        #=================> bagian encode script <=================#
+
+        elif i_user == "4":
+            print(f"{putih} Pastikan script yang akan di encode berada di folder {x} {x}'encode' ")
+            print(f"{putih}Jika script belom ada di folder {x}'encode' {putih}maka ubahlah dulu{x}")
+
+            sc_encode = input(f"{kuning} Masukan nama file yang telah di masukan di folder{x} 'encode' {kuning} \n :" + " ")
 
 
 
