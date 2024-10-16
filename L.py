@@ -166,6 +166,26 @@ def banner():
                     # decode dengan utf-8
                     decode_str = adiy_decode.decode('utf-8')
                     print(f"{hijau} text berhasil di decode : {x}", decode_str)
+
+                    # agar gak infinity
+                    ui_in = input(f"{putih} Apakah anda ingin lanjut (y/n) :" + " ")
+
+                    # kondisi agar back
+                    if ui_in.lower() == "y":
+
+                        # bersihkan halaman
+                        os.system("clear")
+                        print(f"{putih} System akan siap dalam waktu 5 detik")
+                        time.sleep(4)
+
+                    else:
+                        os.system("clear")
+                        print(f"{abang} Terimakasih telah menggunakan script adi {x}")
+                        print(f"{putih}System akan membersihkan terminal anda dalam waktu 5 detik{x}")
+                        print(f"{putih} Silahkan ditunggu {x}")
+                        time.sleep(4)
+
+
                 except UnicodeTranslateError:
                     # decode 
                     print(f"{abang} Data yang ingin di encode salah! atau data bersifat number")
@@ -176,30 +196,40 @@ def banner():
                     # interaksi jika true 
                     print(f"{putih} Silahkan di simpan dengan benar password nya")
                     print(f"Ketik (y/n) jika ingin lanjut{x}")
+                    
+                    
+                    # opsional 
+                    # opsi2 = input("apakah anda ingin lanjut (y/n)")
 
-                    d_i_user = input(f"{putih} Masukan pilihan anda :")
-
-                    if d_i_user.lower() == "y":
-                        os.system("clear")
-                        print(f"{putih} System akan siap dalam waktu 5 detik silahkan tunggu")
-                        time.sleep(4)
-
-                        # jika user n
-                    else:
-                        os.system("clear")
-                        print(f"{abang}Terimakasih telah menggunakan script adiy{x}")
-                        print(f"{putih}Tunggu hingga systm berhasi menghapus data! sekitar 10detik{x}")
-                        time.sleep(9)
-                        break                    
+                    # if opsi2.lower() == "y":
+                    #     os.system("clear")
+                    #     runing = False
+                    #     print("system akan segera siap silahkan tunggu sebentar")
+                    #     time.sleep(5)
+                    # else:
+                    #     os.system("clear")
+                    #     print(f"{abang}Terimaksih telah menggunakan script adiy {x}")
+                    #     time.sleep(5)
+                    #     break
 
             except binascii.Error:
                 print(f"{abang} Masukan string bukan number masbroo")
             except Exception as e:
                 print(f"{abang} Error {x}: {e}")
-                break
+                time.sleep(5)
+
+
+
+        elif i_user == "00":
+            runing = False
+            print(f"{putih}Terimaksih telah menggunakan script adiy{x}")
+
 
         else:
-            break
+            os.system("clear")
+            print(f"{abang} Pilihan tidak valid silahkan coba lagi")
+            time.sleep(3)
+
 
 if __name__ == "__main__":
     banner()
