@@ -7,4 +7,5 @@ for(i = 0; i <= 10; i++){
    } else {
     console.log(i)
    }
+// hasil = 1 - 8 true dan 9 - 10 false
 }

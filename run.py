@@ -54,7 +54,7 @@ def main():
     {putih}╚═╝░░╚═╝╚═════╝░╚═╝░░░╚═╝░░░╚══════╝╚═════╝░  
     {x}
     """)
-    print(f"{BIRU} 1. Get cookies facebook")
+    print(f"{BIRU} 1. Tess cookeis")
     print(f"{BIRU} 2. Amankan password dengan encode")
     print(f"{BIRU} 3. Dekode password")
     print(f"{BIRU} 4. Dekode dokumen")
