@@ -1,42 +1,45 @@
 import requests
+import re 
 
-def login_with_cookies():
-    raw_cookies = input("Masukkan cookies Anda: ")
-    cookies = {}
-    
-    # Mem-parsing cookies yang dimasukkan oleh user
-    for cookie in raw_cookies.split(';'):
-        if '=' in cookie:
-            key, value = cookie.strip().split('=', 1)
-            cookies[key] = value
+mCookies = input("Silahkan masukan cookies anda :" + " ").strip()
 
-    # Mengambil token akses dari cookies
-    access_token = cookies.get('xs')  # Misalnya, menggunakan cookie xs sebagai token akses
+list_ck = mCookies.split(';')
 
-    if access_token:
-        user_info = get_user_info(access_token)
-        if user_info:
-            print(f"Username: {user_info['name']}, ID: {user_info['id']}, Followers: {user_info.get('followers_count', 'N/A')}")
-        else:
-            print("Tidak dapat mengambil informasi pengguna.")
-    else:
-        print("Token akses tidak ditemukan dalam cookies.")
+cok = {}
 
-def get_user_info(token):
-    # URL untuk mengambil data pengguna
-    url = f'https://graph.facebook.com/me?fields=id,name,followers_count&access_token={token}'
+for cookie in mCookies:
+    if '=' in cok:
+        key, value = cookie.strip().split('=', 1)
+        cok[key] = value
+
+cok_search = {key: cok[key] for key in ['c_user', 'xs'] if key in cok} 
+
+# gass ambil nilai 
+def get():
     try:
-        response = requests.get(url)
-        print(f"Status Code: {response.status_code}")  # Tambahkan ini untuk debugging
-        print(f"Response: {response.text}")  # Tambahkan ini untuk melihat detail error
-        if response.status_code == 200:
-            return response.json()
-        else:
-            print(f"Error: {response.status_code}")
-            return None
-    except requests.exceptions.RequestException as e:
-        print(f"Error saat mencoba mengambil informasi pengguna: {e}")
-        return None
+        # Kirim request ke Facebook dengan cookies
+        response = requests.get("https://www.facebook.com/", cookies=cok)
 
-# Jalankan fungsi
-login_with_cookies()
+
+        # Periksa apakah login berhasil (status code 200)
+        if response.status_code == 200:
+            print("Login berhasil.")
+
+            # Cari USER_ID di dalam HTML response menggunakan regex
+            id = re.search(r'"USER_ID":"(\d+)"', response.text)
+
+            if id:
+                # Ambil hasil dari group pertama dari regex
+                facebook_id = id.group(1)
+                print(f"Facebook ID: {facebook_id}")
+            else:
+                print("Facebook ID tidak ditemukan.")
+        else:
+            print(f"Login gagal. Status code: {response.status_code}")
+    except Exception as e:
+        print(f"Terjadi kesalahan: {e}")
+
+# Pastikan fungsi dijalankan hanya saat script dijalankan langsung
+if __name__ == "__main__":
+    get()
+
